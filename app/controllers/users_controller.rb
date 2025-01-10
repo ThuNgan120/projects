@@ -15,12 +15,12 @@ class UsersController < ApplicationController
       #     render :new, alert: "Error creating account."
       #   end
 
-      @user = User.new user_params
-      if @user.save
-        flash[:notice] = "Register success"
+      @user = User.new(user_params)
+      if 
+        flash[:notice] = "Account created successfully."
         redirect_to users_path
-      else
-        flash[:notice] = "Register failed"
+      else @user.save
+         flash[:alert] = "Failed to create account. Please check your input."
         render :new
       end
     end

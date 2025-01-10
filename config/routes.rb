@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "products#index"
 
-  get "signup", to: "registrations#new"
+  get "signup", to: "registrations#new", as: :signup
   post "signup", to: "registrations#create"
   get "login", to: "sessions#new", as: "login"
   post "login", to: "sessions#create"
@@ -13,4 +13,6 @@ Rails.application.routes.draw do
     resources :subscribers, only: [ :create ]
   end
   resource :unsubscribe, only: [ :show ]
+  resources :registrations, only: [:new]
+  resources :users, only: [:new, :create]
 end
