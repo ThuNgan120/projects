@@ -19,7 +19,10 @@
         <%= form.number_field :inventory_count %>
     </div>
 
-    
+    <div>
+      <%= form.label :price, "Price (VND)" %>
+      <%= form.number_field :price, class: "form-control" %>
+    </div>
 
     <div>
       <%= form.submit %>
