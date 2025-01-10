@@ -16,8 +16,9 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to @product
+      redirect_to @product, notice: "Product was successfully created."
     else
+      flash.now[:alert] = "Failed to create product. Please check the input."
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,15 +28,19 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to @product
+      redirect_to @product, notice: "Product updated successfully."
     else
+      flash.now[:alert] = "Failed to update product. Please check the input."
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @product.destroy
-    redirect_to products_path
+    if @product.destroy
+      redirect_to products_path, notice: "Product deleted successfully."
+    else
+      redirect_to products_path, alert: "Failed to delete product."
+    end
   end
 
   private
